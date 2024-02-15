@@ -12,6 +12,7 @@ import UserIcon from "./UserCreationComponents/UserIcon.png";
 import Theme from "./Theme";
 import CustomButton from "./UserCreationComponents/CustomButton";
 import Background from "./UserCreationComponents/background.jpg";
+import { NavigationProp } from "@react-navigation/native";
 
 const style = StyleSheet.create({
   mainTitle: {
@@ -39,7 +40,7 @@ const style = StyleSheet.create({
   },
 });
 
-export default function UserCreation() {
+export default function UserCreation({navigation}) {
   const [nombreUsuario, setNombreUsuario] = useState("");
   const [correo, setCorreo] = useState("");
   const [password, setPassword] = useState("");
