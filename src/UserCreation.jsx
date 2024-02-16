@@ -12,7 +12,6 @@ import UserIcon from "./UserCreationComponents/UserIcon.png";
 import Theme from "./Theme";
 import CustomButton from "./UserCreationComponents/CustomButton";
 import Background from "./UserCreationComponents/background.jpg";
-import { NavigationProp } from "@react-navigation/native";
 import { User, Users } from "./Api/Usuarios";
 
 const style = StyleSheet.create({
@@ -95,7 +94,6 @@ export default function UserCreation({navigation}) {
       }
 
       Users.push(Usuario);
-      console.log(JSON.stringify(Users));
       Alert.alert("¡Cuenta creada!", "Cuenta creada exitosamente");
 
       navigation.goBack();
