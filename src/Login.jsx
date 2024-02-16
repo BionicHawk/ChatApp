@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function Login() {
+export default function Login({navigation}) {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -42,7 +42,7 @@ export default function Login() {
         const matchingUser = Users.find(user => user.email === email);
         if (matchingUser !== undefined) {
             if (matchingUser.password === password) {
-                Alert.alert("Credenciales Correctas", "Las credenciales que proporcionó son las correctas");
+                navigation.navigate('MainPage', {user: matchingUser})
                 return;
             } 
             Alert.alert("Credenciales invalidas", "El correo o la contraseña son incorrectos")
