@@ -17,7 +17,7 @@ const style = StyleSheet.create({
     fontSize: 16,
     borderColor: Theme.AccentColor,
     borderStyle: "solid",
-    borderWidth: 3,
+    borderWidth: 2,
     borderRadius: 20,
   },
 });

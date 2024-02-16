@@ -13,6 +13,7 @@ import Theme from "./Theme";
 import CustomButton from "./UserCreationComponents/CustomButton";
 import Background from "./UserCreationComponents/background.jpg";
 import { NavigationProp } from "@react-navigation/native";
+import { User, Users } from "./Api/Usuarios";
 
 const style = StyleSheet.create({
   mainTitle: {
@@ -59,12 +60,9 @@ export default function UserCreation({navigation}) {
 
   function CrearCuenta() {
     if (nombreUsuario.length > 0 && correo.length > 0 && password.length > 0) {
-      const Usuario = {
-        name: nombreUsuario,
-        email: correo,
-        password: password,
-      };
-      console.log(JSON.stringify(Usuario));
+      const Usuario = new User(nombreUsuario, correo, password);
+      Users.push(Usuario);
+      console.log(JSON.stringify(Users));
       Alert.alert("¡Cuenta creada!", "Cuenta creada exitosamente");
       return;
     }
