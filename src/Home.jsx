@@ -36,13 +36,17 @@ export default function Home({navigation}) {
         navigation.navigate('Register');
     }
 
+    function navigateToLoginPage() {
+        navigation.navigate('Login');
+    }
+
   return (
     <ImageBackground source={background} style={styles.background}>
         <Text style={styles.title}>Bienvenido a ChatApp</Text>
         <Image source={chatIcon} style={styles.image}/>
         <View style={styles.buttons}>
             <CustomButton Title="Registrarse" onPress={navigateToRegisterPage}/>
-
+            <CustomButton Title="Inciar Sesión" onPress={navigateToLoginPage}/>
         </View>
     </ImageBackground>
   )

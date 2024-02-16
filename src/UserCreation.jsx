@@ -94,7 +94,6 @@ export default function UserCreation({navigation}) {
       }
 
       Users.push(Usuario);
-      console.log(JSON.stringify(Users));
       Alert.alert("¡Cuenta creada!", "Cuenta creada exitosamente");
 
       navigation.goBack();
