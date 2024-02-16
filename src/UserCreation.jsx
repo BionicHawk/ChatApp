@@ -45,6 +45,7 @@ export default function UserCreation({navigation}) {
   const [nombreUsuario, setNombreUsuario] = useState("");
   const [correo, setCorreo] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmedPass, setConfirmedPass] = useState("");
 
   function getUsuario(value) {
     setNombreUsuario(value);
@@ -58,12 +59,47 @@ export default function UserCreation({navigation}) {
     setPassword(value);
   }
 
+  function getConfirmPass(value) {
+    setConfirmedPass(value);
+  }
+
+  function findMatchingUser(user) {
+    for (let i = 0; i < Users.length; ++i) {
+      const matchingUser = Users[i];
+      if (matchingUser.name === user.name || matchingUser.email === user.email) {
+        return matchingUser;
+      }
+    }
+    return undefined;
+  }
+
   function CrearCuenta() {
     if (nombreUsuario.length > 0 && correo.length > 0 && password.length > 0) {
+
+      if (password !== confirmedPass) {
+        Alert.alert("¡La contraseña no coincide!", "La contraseña que proporcionó en los campos no coinicide")
+        return;
+      }
+
       const Usuario = new User(nombreUsuario, correo, password);
+      const matchedUser = findMatchingUser(Usuario);
+
+      if (matchedUser !== undefined) {
+        const defaultMsg = "Intentelo de nuevo";
+        if (matchedUser.name === Usuario.name) {
+          Alert.alert("Ya existe un usuario con ese nombre de usuario", defaultMsg);
+        } else {
+          Alert.alert("Ya existe un usuario con ese correo electronico", defaultMsg);
+        }
+        return;
+      }
+
       Users.push(Usuario);
       console.log(JSON.stringify(Users));
       Alert.alert("¡Cuenta creada!", "Cuenta creada exitosamente");
+
+      navigation.goBack();
+
       return;
     }
     Alert.alert("Información Invalida", "Algunos campos están vacios");
@@ -88,6 +124,11 @@ export default function UserCreation({navigation}) {
           labelText="Contraseña"
           hint="Inserte la contraseña"
           getText={getPassword}
+        />
+        <Field 
+          labelText="Confirmar Contraseña"
+          hint="Vuelva a escribir la contraseña aquí"
+          getText={getConfirmPass}
         />
         <CustomButton Title="Crear Cuenta" onPress={CrearCuenta} />
       </View>
