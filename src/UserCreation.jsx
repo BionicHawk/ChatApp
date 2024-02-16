@@ -12,7 +12,6 @@ import UserIcon from "./UserCreationComponents/UserIcon.png";
 import Theme from "./Theme";
 import CustomButton from "./UserCreationComponents/CustomButton";
 import Background from "./UserCreationComponents/background.jpg";
-import { NavigationProp } from "@react-navigation/native";
 import { User, Users } from "./Api/Usuarios";
 
 const style = StyleSheet.create({
