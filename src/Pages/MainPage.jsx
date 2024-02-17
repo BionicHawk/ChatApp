@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, DrawerLayoutAndroid } from "react-native";
 import MenuButton from "./MainPageComponents/MenuButton";
 import Constants from "expo-constants";
 import SideMenu from "./MainPageComponents/SideMenu";
+import { selectedLanguage } from "../Resources/Settings";
 
 const styles = StyleSheet.create({
   container: {
@@ -24,6 +25,9 @@ const styles = StyleSheet.create({
 });
 
 export default function MainPage({ route, navigation }) {
+  const language = selectedLanguage;
+  const strings = language.MainPageScreen;
+
   const { user } = route.params;
   const drawer = useRef(null);
 
@@ -42,12 +46,14 @@ export default function MainPage({ route, navigation }) {
       style={styles.container}
       ref={drawer}
       drawerWidth={300}
-      renderNavigationView={() => (<SideMenu onExitSesion={exitSesion}/>)}
+      renderNavigationView={() => <SideMenu onExitSesion={exitSesion} />}
     >
       <View style={styles.safeArea}>
         <View style={styles.header}>
           <MenuButton onPress={showMenu} />
-          <Text style={styles.headerTitle}>Hola, {user.name}</Text>
+          <Text style={styles.headerTitle}>
+            {strings.WelcomeHeaderLabel.replace("%s", user.name)}
+          </Text>
         </View>
       </View>
     </DrawerLayoutAndroid>

@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import CustomButton from '../../UserCreationComponents/CustomButton'
 import Constants from 'expo-constants'
+import { selectedLanguage } from '../../Resources/Settings'
 
 const styles = StyleSheet.create({
     container: {
@@ -14,6 +15,9 @@ const styles = StyleSheet.create({
 
 export default function SideMenu({onExitSesion}) {
 
+    const language = selectedLanguage;
+    const strings = language.MainPageScreen;
+
     function handleOnPress() {
         onExitSesion();
     }
@@ -21,7 +25,7 @@ export default function SideMenu({onExitSesion}) {
   return (
     <View style={styles.container}>
         <View style={styles.contentView}>
-            <CustomButton Title="Salir de la sesión" onPress={handleOnPress}/>
+            <CustomButton Title={strings.ExitSesion} onPress={handleOnPress}/>
         </View>
     </View>
   )

@@ -1,0 +1,64 @@
+{
+    "HomeScreen": {
+        "WelcomeToChatApp": "Welcome to ChatApp",
+        "SignUp": "Sign up",
+        "Login": "Log in"
+    },
+    "UserCreation": {
+        "CreateYourAccount": "Create your account!",
+        "UsernameLabel": {
+            "Username": "Username",
+            "hint": "Example: Angel"
+        },
+        "EmailLabel": {
+            "Email": "Email",
+            "hint": "Example: example@domain.com"
+        },
+        "PasswordLabel": {
+            "Password": "Password",
+            "hint": "Write your own password"
+        },
+        "ConfirmPassword": {
+            "ConfirmPassword": "Confirm your own password",
+            "hint": "Repeat your own password"
+        },
+        "CreateAccount": "Create your account"
+    },
+    "MainPageScreen": {
+        "WelcomeHeaderLabel": "Hi, %s",
+        "ExitSesion": "Log out"
+    },
+    "LoginScreen": {
+        "EnterCredentials": "Enter your credentials!",
+        "EmailLabel": {
+            "Email": "Email",
+            "hint": "Enter your email"
+        },
+        "PasswordLabel": {
+            "Password": "Password",
+            "hint": "Enter your password"
+        },
+        "Login": "Log in"
+    },
+    "Alerts": {
+        "titles": {
+            "NotMatchingPassword": "The given password does not match!",
+            "AlreadyExistingUsername": "An user with the same username already exists!",
+            "AlreadyExistingEmail": "An user with the same email already exists!",
+            "CreatedUser": "Created Account!",
+            "NotValidInfo": "Not valid info!",
+            "NotValidCredentials": "¡Credenciales inválidas!",
+            "EmptyFields": "Empty Fields!"
+        },
+        "messages": {
+            "NotMatchingPassword": "The given password from the fields doesn't match",
+            "AlreadyExistingUsername": "Try again",
+            "AlreadyExistingEmail": "Try again",
+            "CreatedUser": "Account created successfully",
+            "NotValidInfo": "Some fields are empty",
+            "NotValidCredentials": "El correo electronico y/o la contraseña son incorrectos",
+            "EmptyFields": "Please fill the fields!"
+        }
+    }
+
+}

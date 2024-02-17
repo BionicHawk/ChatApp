@@ -5,6 +5,7 @@ import background from "./UserCreationComponents/background.jpg";
 import CustomButton from "./UserCreationComponents/CustomButton";
 import Field from "./UserCreationComponents/Field";
 import { Users } from "./Api/Usuarios";
+import { selectedLanguage } from "./Resources/Settings";
 
 const styles = StyleSheet.create({
   mainTitle: {
@@ -26,6 +27,8 @@ const styles = StyleSheet.create({
 
 export default function Login({navigation}) {
 
+    const language = selectedLanguage;
+    const strings = language.LoginScreen;
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -38,35 +41,39 @@ export default function Login({navigation}) {
   }
 
   function authenticate() {
+    const alertStrings = language.Alerts;
+    const titles = alertStrings.titles;
+    const messages = alertStrings.messages;
+
     if (email.length > 0 && password.length > 0) {
         const matchingUser = Users.find(user => user.email === email);
         if (matchingUser !== undefined) {
             if (matchingUser.password === password) {
-                navigation.navigate('MainPage', {user: matchingUser})
+                navigation.navigate('MainPage', {user: matchingUser});
                 return;
             } 
-            Alert.alert("Credenciales invalidas", "El correo o la contraseña son incorrectos")
+            Alert.alert(titles.NotValidCredentials, messages.NotValidCredentials)
         }
         return;
     }
-    Alert.alert("Campos Vacíos", "Por favor llene todos los campos");
+    Alert.alert(titles.EmptyFields, messages.EmptyFields);
   }
 
   return (
     <ImageBackground source={background} style={styles.background}>
       <View style={styles.loginCard}>
-        <Text style={styles.mainTitle}>¡Ingresa con tus credenciales!</Text>
+        <Text style={styles.mainTitle}>{strings.EnterCredentials}</Text>
         <Field
-          labelText="Correo Electronico"
-          hint="Ingrese su correo electronico"
+          labelText={strings.EmailLabel.Email}
+          hint={strings.EmailLabel.hint}
           getText={getEmail}
         />
         <Field
-          labelText="Contraseña"
-          hint="Ingrese su contraseña"
+          labelText={strings.PasswordLabel.Password}
+          hint={strings.PasswordLabel.hint}
           getText={getPass}
         />
-        <CustomButton Title="Iniciar Sesión" onPress={authenticate} />
+        <CustomButton Title={strings.Login} onPress={authenticate} />
       </View>
     </ImageBackground>
   );
