@@ -1,4 +1,5 @@
 {
+    "LanguageName": "English (US)",
     "HomeScreen": {
         "WelcomeToChatApp": "Welcome to ChatApp",
         "SignUp": "Sign up",
@@ -26,7 +27,8 @@
     },
     "MainPageScreen": {
         "WelcomeHeaderLabel": "Hi, %s",
-        "ExitSesion": "Log out"
+        "ExitSesion": "Log out",
+        "SwitchLanguage": "Switch the language"
     },
     "LoginScreen": {
         "EnterCredentials": "Enter your credentials!",

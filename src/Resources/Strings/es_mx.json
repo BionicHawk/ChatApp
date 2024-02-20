@@ -1,4 +1,5 @@
 {
+    "LanguageName": "Español (MX)",
     "HomeScreen": {
         "WelcomeToChatApp": "Bienvenido a ChatApp",
         "SignUp": "Registrarse",
@@ -38,7 +39,8 @@
     },
     "MainPageScreen": {
         "WelcomeHeaderLabel": "Hola, %s",
-        "ExitSesion": "Salir de la sesión"
+        "ExitSesion": "Salir de la sesión",
+        "SwitchLanguage": "Cambiar el idioma"
     },
     "Alerts": {
         "titles": {

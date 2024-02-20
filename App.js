@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./src/Home";
 import Login from "./src/Login";
 import MainPage from "./src/Pages/MainPage";
+import LanguageScreen from "./src/Pages/LanguageScreen";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -27,7 +28,12 @@ export default function App() {
           name="Login"
           component={Login}
         />
-        <Stack.Screen options={{headerShown: false}} name="MainPage" component={MainPage} />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="MainPage"
+          component={MainPage}
+        />
+        <Stack.Screen name="LanguageSwitching" component={LanguageScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

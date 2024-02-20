@@ -1,9 +1,9 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { View, Text, StyleSheet, DrawerLayoutAndroid } from "react-native";
 import MenuButton from "./MainPageComponents/MenuButton";
 import Constants from "expo-constants";
 import SideMenu from "./MainPageComponents/SideMenu";
-import { selectedLanguage } from "../Resources/Settings";
+import { settings } from "../Resources/Settings";
 
 const styles = StyleSheet.create({
   container: {
@@ -25,11 +25,13 @@ const styles = StyleSheet.create({
 });
 
 export default function MainPage({ route, navigation }) {
-  const language = selectedLanguage;
-  const strings = language.MainPageScreen;
-
+  const [strings, setStrings] = useState(settings.selectedLanguage.MainPageScreen);
   const { user } = route.params;
   const drawer = useRef(null);
+
+  useEffect(() => {
+    setStrings(settings.selectedLanguage.MainPageScreen);
+  }, [settings.selectedLanguage]);
 
   function showMenu() {
     drawer.current?.openDrawer();
@@ -41,12 +43,16 @@ export default function MainPage({ route, navigation }) {
     navigation.goBack();
   }
 
+  function goToLanguageScreen() {
+    navigation.navigate("LanguageSwitching");
+  }
+
   return (
     <DrawerLayoutAndroid
       style={styles.container}
       ref={drawer}
       drawerWidth={300}
-      renderNavigationView={() => <SideMenu onExitSesion={exitSesion} />}
+      renderNavigationView={() => <SideMenu onExitSesion={exitSesion} onLanguageSwitching={goToLanguageScreen}/>}
     >
       <View style={styles.safeArea}>
         <View style={styles.header}>

@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, ImageBackground, StyleSheet, Image } from 'react-native'
 import background from "./UserCreationComponents/background.jpg";
 import chatIcon from "./HomeComponents/ChatIcon.png"
 import Theme from './Theme';
 import CustomButton from './UserCreationComponents/CustomButton';
-import { selectedLanguage } from './Resources/Settings';
+import { settings } from './Resources/Settings';
 
 const styles = StyleSheet.create({
     background: {
@@ -33,8 +33,11 @@ const styles = StyleSheet.create({
 
 export default function Home({navigation}) {
 
-    const language = selectedLanguage;
-    const strings = language.HomeScreen;
+    const [strings, setStrings] = useState(settings.selectedLanguage.HomeScreen);
+
+    useEffect(() => {
+        setStrings(settings.selectedLanguage.HomeScreen);
+    }, [settings.selectedLanguage])
 
     function navigateToRegisterPage() {
         navigation.navigate('Register');

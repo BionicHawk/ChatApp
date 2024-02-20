@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -13,7 +13,7 @@ import Theme from "./Theme";
 import CustomButton from "./UserCreationComponents/CustomButton";
 import Background from "./UserCreationComponents/background.jpg";
 import { User, Users } from "./Api/Usuarios";
-import { selectedLanguage } from "./Resources/Settings";
+import { languages, settings } from "./Resources/Settings";
 
 const style = StyleSheet.create({
   mainTitle: {
@@ -33,6 +33,7 @@ const style = StyleSheet.create({
     margin: 30,
     borderRadius: 20,
     padding: 10,
+    elevation: 20
   },
   background: {
     backgroundColor: "#000000",
@@ -43,8 +44,13 @@ const style = StyleSheet.create({
 
 export default function UserCreation({navigation}) {
 
-  const language = selectedLanguage;
-  const strings = language.UserCreation;
+  const [strings, setStrings] = useState(settings.selectedLanguage.UserCreation);
+  const [alertStrings, setAlertStrings] = useState(settings.selectedLanguage.UserCreation);
+
+  useEffect(() => {
+    setStrings(settings.selectedLanguage.UserCreation);
+    setAlertStrings(settings.selectedLanguage.Alerts);
+  }, [settings.selectedLanguage]);
 
   const [nombreUsuario, setNombreUsuario] = useState("");
   const [correo, setCorreo] = useState("");
@@ -78,7 +84,6 @@ export default function UserCreation({navigation}) {
   }
 
   function CrearCuenta() {
-    const alertStrings = language.Alerts;
     const titles = alertStrings.titles;
     const messages = alertStrings.messages;
     if (nombreUsuario.length > 0 && correo.length > 0 && password.length > 0) {

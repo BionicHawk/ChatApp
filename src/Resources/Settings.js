@@ -3,4 +3,6 @@ export const languages = {
     en_us: require('./Strings/en_us.json')
 };
 
-export let selectedLanguage = languages.en_us;
+export let settings = {
+    selectedLanguage: {...languages.en_us}
+};
