@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View, ImageBackground, StyleSheet, Text, Alert } from "react-native";
 import Theme from "./Theme";
 import background from "./UserCreationComponents/background.jpg";
@@ -6,6 +6,7 @@ import CustomButton from "./UserCreationComponents/CustomButton";
 import Field from "./UserCreationComponents/Field";
 import { Users } from "./Api/Usuarios";
 import { settings } from "./Resources/Settings";
+import { settingsContext } from "../App";
 
 const styles = StyleSheet.create({
   mainTitle: {
@@ -27,15 +28,18 @@ const styles = StyleSheet.create({
 });
 
 export default function Login({ navigation }) {
-  const [strings, setStrings] = useState(settings.selectedLanguage.LoginScreen);
-  const [alertStrings, setAlertStrings] = useState(settings.selectedLanguage.Alerts);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const {language, setLanguage} = useContext(settingsContext);
+  const [strings, setStrings] = useState(language.LoginScreen);
+  const [alertStrings, setAlertStrings] = useState(language.Alerts);
 
   useEffect(() => {
-    setStrings(settings.selectedLanguage.LoginScreen);
-    setAlertStrings(settings.selectedLanguage.Alerts);
-  }, [settings.selectedLanguage]);
+    setLanguage(language);
+    setStrings(language.LoginScreen);
+    setAlertStrings(language.Alerts);
+  }, [language]);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   function getEmail(value) {
     setEmail(value);

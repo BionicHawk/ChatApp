@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Modal, StyleSheet, Text, View } from "react-native";
 import CustomButton from "../../UserCreationComponents/CustomButton";
 import Constants from "expo-constants";
 import { settings } from "../../Resources/Settings";
+import { settingsContext } from "../../../App";
 
 const styles = StyleSheet.create({
   container: {
@@ -22,11 +23,13 @@ const styles = StyleSheet.create({
 });
 
 export default function SideMenu({ onExitSesion, onLanguageSwitching }) {
-  const [strings, setStrings] = useState(settings.selectedLanguage.MainPageScreen);
+  const {language, setLanguage} = useContext(settingsContext)
+  const [strings, setStrings] = useState(language.MainPageScreen);
 
   useEffect(() => {
-    setStrings(settings.selectedLanguage.MainPageScreen);
-  }, [settings.selectedLanguage]);
+    setLanguage(language);
+    setStrings(language.MainPageScreen)
+  }, [language]);
 
   function handleOnPress() {
     onExitSesion();

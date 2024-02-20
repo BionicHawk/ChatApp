@@ -1,11 +1,13 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useContext } from "react";
+import { View, Text, StyleSheet, TouchableOpacity, Settings } from "react-native";
 import { languages, settings } from "../Resources/Settings";
 import Theme from "../Theme";
 import Home from "../Home";
+import { settingsContext } from "../../App";
 
 export default function LanguageScreen({ navigation }) {
   const allowedLangs = [languages.en_us, languages.es_mx];
+  const {language, setLanguage} = useContext(settingsContext)
 
   const styles = StyleSheet.create({
     containerItem: {
@@ -37,8 +39,8 @@ export default function LanguageScreen({ navigation }) {
       <TouchableOpacity
         style={applyingStyle}
         onPress={() => {
-          settings.selectedLanguage = { ...language };
-          navigation.popToTop();
+          setLanguage(language)
+          navigation.goBack();
         }}
       >
         <Text style={applyingText}>{language.LanguageName}</Text>
@@ -53,7 +55,7 @@ export default function LanguageScreen({ navigation }) {
           language={lang}
           key={lang.LanguageName}
           selected={
-            lang.LanguageName === settings.selectedLanguage.LanguageName
+            lang.LanguageName === language.LanguageName
           }
         />
       ))}

@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { View, Text, StyleSheet, DrawerLayoutAndroid } from "react-native";
 import MenuButton from "./MainPageComponents/MenuButton";
 import Constants from "expo-constants";
 import SideMenu from "./MainPageComponents/SideMenu";
 import { settings } from "../Resources/Settings";
+import { settingsContext } from "../../App";
 
 const styles = StyleSheet.create({
   container: {
@@ -25,7 +26,14 @@ const styles = StyleSheet.create({
 });
 
 export default function MainPage({ route, navigation }) {
-  const [strings, setStrings] = useState(settings.selectedLanguage.MainPageScreen);
+  const {language, setLanguage} = useContext(settingsContext);
+  const [strings, setStrings] = useState(language.MainPageScreen);
+
+  useEffect(() => {
+    setLanguage(language);
+    setStrings(language.MainPageScreen);
+  }, [language])
+
   const { user } = route.params;
   const drawer = useRef(null);
 

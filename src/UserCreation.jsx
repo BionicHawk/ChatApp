@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -13,7 +13,7 @@ import Theme from "./Theme";
 import CustomButton from "./UserCreationComponents/CustomButton";
 import Background from "./UserCreationComponents/background.jpg";
 import { User, Users } from "./Api/Usuarios";
-import { languages, settings } from "./Resources/Settings";
+import { settingsContext } from "../App";
 
 const style = StyleSheet.create({
   mainTitle: {
@@ -44,13 +44,15 @@ const style = StyleSheet.create({
 
 export default function UserCreation({navigation}) {
 
-  const [strings, setStrings] = useState(settings.selectedLanguage.UserCreation);
-  const [alertStrings, setAlertStrings] = useState(settings.selectedLanguage.UserCreation);
+  const {language, setLanguage} = useContext(settingsContext)
+  const [strings, setStrings] = useState(language.UserCreation);
+  const [alertStrings, setAlertStrings] = useState(language.Alerts);
 
   useEffect(() => {
-    setStrings(settings.selectedLanguage.UserCreation);
-    setAlertStrings(settings.selectedLanguage.Alerts);
-  }, [settings.selectedLanguage]);
+    setLanguage(language);
+    setStrings(language.UserCreation);
+    setAlertStrings(language.Alerts);
+  }, [language])
 
   const [nombreUsuario, setNombreUsuario] = useState("");
   const [correo, setCorreo] = useState("");
