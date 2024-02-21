@@ -4,7 +4,7 @@ import Theme from "./Theme";
 import background from "./UserCreationComponents/background.jpg";
 import CustomButton from "./UserCreationComponents/CustomButton";
 import Field from "./UserCreationComponents/Field";
-import { Users } from "./Api/Usuarios";
+import { User, Users } from "./Api/Usuarios";
 import { settings } from "./Resources/Settings";
 import { settingsContext } from "../App";
 
@@ -52,6 +52,13 @@ export default function Login({ navigation }) {
   function authenticate() {
     const titles = alertStrings.titles;
     const messages = alertStrings.messages;
+
+    console.log(`${email}: ${password}`)
+    
+    for (let i = 0; i < Users.length; ++i) {
+      const user = Users[i];
+      console.log(JSON.stringify(user))
+    }
 
     if (email.length > 0 && password.length > 0) {
       const matchingUser = Users.find((user) => user.email === email);

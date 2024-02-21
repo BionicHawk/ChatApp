@@ -10,7 +10,7 @@ import LanguageScreen from "./src/Pages/LanguageScreen";
 import { createContext, useState } from "react";
 import { languages } from "./src/Resources/Settings";
 
-export const settingsContext = createContext()
+export const settingsContext = createContext();
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -18,7 +18,7 @@ export default function App() {
   const [language, setLanguage] = useState(languages.es_mx);
 
   return (
-    <settingsContext.Provider value={{language, setLanguage}}>
+    <settingsContext.Provider value={{ language, setLanguage }}>
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
@@ -41,7 +41,11 @@ export default function App() {
             name="MainPage"
             component={MainPage}
           />
-          <Stack.Screen name="LanguageSwitching" component={LanguageScreen} />
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name="LanguageSwitching"
+            component={LanguageScreen}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </settingsContext.Provider>

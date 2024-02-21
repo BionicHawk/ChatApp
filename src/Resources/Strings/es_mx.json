@@ -25,6 +25,11 @@
         },
         "CreateAccount": "Crear Cuenta"
     },
+    "MainPageScreen": {
+        "WelcomeHeaderLabel": "Hola, %s",
+        "ExitSesion": "Salir de la sesión",
+        "SwitchLanguage": "Cambiar el idioma"
+    },
     "LoginScreen": {
         "EnterCredentials": "¡Ingresa con tus credenciales!",
         "EmailLabel": {
@@ -37,10 +42,8 @@
         },
         "Login": "Iniciar Sesión"
     },
-    "MainPageScreen": {
-        "WelcomeHeaderLabel": "Hola, %s",
-        "ExitSesion": "Salir de la sesión",
-        "SwitchLanguage": "Cambiar el idioma"
+    "LanguageSwitchingPage": {
+        "title": "Seleccione el lenguage"
     },
     "Alerts": {
         "titles": {

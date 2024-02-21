@@ -42,6 +42,9 @@
         },
         "Login": "Log in"
     },
+    "LanguageSwitchingPage": {
+        "title": "Select the Language"
+    },
     "Alerts": {
         "titles": {
             "NotMatchingPassword": "The given password does not match!",
