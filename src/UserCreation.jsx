@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -13,6 +13,7 @@ import Theme from "./Theme";
 import CustomButton from "./UserCreationComponents/CustomButton";
 import Background from "./UserCreationComponents/background.jpg";
 import { User, Users } from "./Api/Usuarios";
+import { settingsContext } from "../App";
 
 const style = StyleSheet.create({
   mainTitle: {
@@ -32,6 +33,7 @@ const style = StyleSheet.create({
     margin: 30,
     borderRadius: 20,
     padding: 10,
+    elevation: 20
   },
   background: {
     backgroundColor: "#000000",
@@ -41,6 +43,17 @@ const style = StyleSheet.create({
 });
 
 export default function UserCreation({navigation}) {
+
+  const {language, setLanguage} = useContext(settingsContext)
+  const [strings, setStrings] = useState(language.UserCreation);
+  const [alertStrings, setAlertStrings] = useState(language.Alerts);
+
+  useEffect(() => {
+    setLanguage(language);
+    setStrings(language.UserCreation);
+    setAlertStrings(language.Alerts);
+  }, [language])
+
   const [nombreUsuario, setNombreUsuario] = useState("");
   const [correo, setCorreo] = useState("");
   const [password, setPassword] = useState("");
@@ -73,10 +86,11 @@ export default function UserCreation({navigation}) {
   }
 
   function CrearCuenta() {
+    const titles = alertStrings.titles;
+    const messages = alertStrings.messages;
     if (nombreUsuario.length > 0 && correo.length > 0 && password.length > 0) {
-
       if (password !== confirmedPass) {
-        Alert.alert("¡La contraseña no coincide!", "La contraseña que proporcionó en los campos no coinicide")
+        Alert.alert(titles.NotMatchingPassword, messages.NotMatchingPassword)
         return;
       }
 
@@ -84,51 +98,50 @@ export default function UserCreation({navigation}) {
       const matchedUser = findMatchingUser(Usuario);
 
       if (matchedUser !== undefined) {
-        const defaultMsg = "Intentelo de nuevo";
         if (matchedUser.name === Usuario.name) {
-          Alert.alert("Ya existe un usuario con ese nombre de usuario", defaultMsg);
+          Alert.alert(titles.AlreadyExistingUsername, messages.AlreadyExistingUsername);
         } else {
-          Alert.alert("Ya existe un usuario con ese correo electronico", defaultMsg);
+          Alert.alert(titles.AlreadyExistingEmail, messages.AlreadyExistingEmail);
         }
         return;
       }
 
       Users.push(Usuario);
-      Alert.alert("¡Cuenta creada!", "Cuenta creada exitosamente");
+      Alert.alert(titles.CreatedUser, messages.CreatedUser);
 
       navigation.goBack();
 
       return;
     }
-    Alert.alert("Información Invalida", "Algunos campos están vacios");
+    Alert.alert(titles.NotValidInfo, messages.NotValidInfo);
   }
 
   return (
     <ImageBackground style={style.background} source={Background}>
       <View style={style.loginCard}>
-        <Text style={style.mainTitle}>¡Crea tu Cuenta!</Text>
+        <Text style={style.mainTitle}>{strings.CreateYourAccount}</Text>
         <Image style={style.image} source={UserIcon} />
         <Field
-          labelText="Nombre de Usuario"
-          hint="Ejemplo: Angel"
+          labelText={strings.UsernameLabel.Username}
+          hint={strings.UsernameLabel.hint}
           getText={getUsuario}
         />
         <Field
-          labelText="Correo Electronico"
-          hint="Ejemplo: ejemplo@dominio.com"
+          labelText={strings.EmailLabel.Email}
+          hint={strings.EmailLabel.hint}
           getText={getCorreo}
         />
         <Field
-          labelText="Contraseña"
-          hint="Inserte la contraseña"
+          labelText={strings.PasswordLabel.Password}
+          hint={strings.PasswordLabel.hint}
           getText={getPassword}
         />
         <Field 
-          labelText="Confirmar Contraseña"
-          hint="Vuelva a escribir la contraseña aquí"
+          labelText={strings.ConfirmPassword.ConfirmPassword}
+          hint={strings.ConfirmPassword.hint}
           getText={getConfirmPass}
         />
-        <CustomButton Title="Crear Cuenta" onPress={CrearCuenta} />
+        <CustomButton Title={strings.CreateAccount} onPress={CrearCuenta} />
       </View>
     </ImageBackground>
   );

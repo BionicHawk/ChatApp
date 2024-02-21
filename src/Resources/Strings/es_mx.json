@@ -1,0 +1,65 @@
+{
+    "LanguageName": "Español (MX)",
+    "HomeScreen": {
+        "WelcomeToChatApp": "Bienvenido a ChatApp",
+        "SignUp": "Registrarse",
+        "Login": "Iniciar Sesión"
+    },
+    "UserCreation": {
+        "CreateYourAccount": "¡Crea tu Cuenta!",
+        "UsernameLabel": {
+            "Username": "Nombre de Usuario",
+            "hint": "Ejemplo: Angel"
+        },
+        "EmailLabel": {
+            "Email": "Correo Electrónico",
+            "hint": "Ejemplo: ejemplo@dominio.com"
+        },
+        "PasswordLabel": {
+            "Password": "Contraseña",
+            "hint": "Escriba la contraseña"
+        },
+        "ConfirmPassword": {
+            "ConfirmPassword": "Confirmar Contraseña",
+            "hint": "Vuelva a escribir la contraseña aquí"
+        },
+        "CreateAccount": "Crear Cuenta"
+    },
+    "LoginScreen": {
+        "EnterCredentials": "¡Ingresa con tus credenciales!",
+        "EmailLabel": {
+            "Email": "Correo Electrónico",
+            "hint": "Ingrese su correo electrónico"
+        },
+        "PasswordLabel": {
+            "Password": "Contraseña",
+            "hint": "Ingrese su contraseña"
+        },
+        "Login": "Iniciar Sesión"
+    },
+    "MainPageScreen": {
+        "WelcomeHeaderLabel": "Hola, %s",
+        "ExitSesion": "Salir de la sesión",
+        "SwitchLanguage": "Cambiar el idioma"
+    },
+    "Alerts": {
+        "titles": {
+            "NotMatchingPassword": "¡La contraseña no coincide!",
+            "AlreadyExistingUsername": "¡Ya existe un usuario con ese nombre de usuario!",
+            "AlreadyExistingEmail": "¡Ya existe un usuario con ese correo electrónico!",
+            "CreatedUser": "¡Cuenta creada!",
+            "NotValidInfo": "¡Información inválida!",
+            "NotValidCredentials": "¡Credenciales inválidas!",
+            "EmptyFields": "¡Campos vacíos!"
+        },
+        "messages": {
+            "NotMatchingPassword": "La contraseña que proporcionó en los campos no coincide",
+            "AlreadyExistingUsername": "Inténtelo de nuevo",
+            "AlreadyExistingEmail": "Inténtelo de nuevo",
+            "CreatedUser": "Cuenta creada exitosamente",
+            "NotValidInfo": "Algunos campos están vacíos",
+            "NotValidCredentials": "El correo electronico y/o la contraseña son incorrectos",
+            "EmptyFields": "Por favor llene los campos"
+        }
+    }
+}

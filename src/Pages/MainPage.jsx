@@ -1,8 +1,9 @@
-import React, { useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { View, Text, StyleSheet, DrawerLayoutAndroid } from "react-native";
 import MenuButton from "./MainPageComponents/MenuButton";
 import Constants from "expo-constants";
 import SideMenu from "./MainPageComponents/SideMenu";
+import { settingsContext } from "../../App";
 
 const styles = StyleSheet.create({
   container: {
@@ -24,17 +25,31 @@ const styles = StyleSheet.create({
 });
 
 export default function MainPage({ route, navigation }) {
+  const {language, setLanguage} = useContext(settingsContext);
+  const [strings, setStrings] = useState(language.MainPageScreen);
+
+  useEffect(() => {
+    setLanguage(language);
+    setStrings(language.MainPageScreen);
+  }, [language])
+
   const { user } = route.params;
   const drawer = useRef(null);
 
   function showMenu() {
     drawer.current?.openDrawer();
+    console.log("Tratando de abir el menu lateral...");
+    console.log(`Referencia al menu lateral: ${(drawer.current === null || drawer.current === undefined)}`)
   }
 
   function exitSesion() {
     drawer.current?.closeDrawer();
-    navigation.goBack();
-    navigation.goBack();
+    navigation.popToTop();
+  }
+  
+  function goToLanguageScreen() {
+    drawer.current?.closeDrawer();
+    navigation.navigate("LanguageSwitching");
   }
 
   return (
@@ -42,12 +57,14 @@ export default function MainPage({ route, navigation }) {
       style={styles.container}
       ref={drawer}
       drawerWidth={300}
-      renderNavigationView={() => (<SideMenu onExitSesion={exitSesion}/>)}
+      renderNavigationView={() => <SideMenu onExitSesion={exitSesion} onLanguageSwitching={goToLanguageScreen}/>}
     >
       <View style={styles.safeArea}>
         <View style={styles.header}>
           <MenuButton onPress={showMenu} />
-          <Text style={styles.headerTitle}>Hola, {user.name}</Text>
+          <Text style={styles.headerTitle}>
+            {strings.WelcomeHeaderLabel.replace("%s", user.name)}
+          </Text>
         </View>
       </View>
     </DrawerLayoutAndroid>

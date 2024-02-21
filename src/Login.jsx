@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View, ImageBackground, StyleSheet, Text, Alert } from "react-native";
 import Theme from "./Theme";
 import background from "./UserCreationComponents/background.jpg";
 import CustomButton from "./UserCreationComponents/CustomButton";
 import Field from "./UserCreationComponents/Field";
 import { Users } from "./Api/Usuarios";
+import { settings } from "./Resources/Settings";
+import { settingsContext } from "../App";
 
 const styles = StyleSheet.create({
   mainTitle: {
@@ -16,6 +18,7 @@ const styles = StyleSheet.create({
     margin: 30,
     borderRadius: 20,
     padding: 10,
+    elevation: 20,
   },
   background: {
     backgroundColor: "#000000",
@@ -24,10 +27,19 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function Login({navigation}) {
+export default function Login({ navigation }) {
+  const {language, setLanguage} = useContext(settingsContext);
+  const [strings, setStrings] = useState(language.LoginScreen);
+  const [alertStrings, setAlertStrings] = useState(language.Alerts);
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+  useEffect(() => {
+    setLanguage(language);
+    setStrings(language.LoginScreen);
+    setAlertStrings(language.Alerts);
+  }, [language]);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   function getEmail(value) {
     setEmail(value);
@@ -38,35 +50,38 @@ export default function Login({navigation}) {
   }
 
   function authenticate() {
+    const titles = alertStrings.titles;
+    const messages = alertStrings.messages;
+
     if (email.length > 0 && password.length > 0) {
-        const matchingUser = Users.find(user => user.email === email);
-        if (matchingUser !== undefined) {
-            if (matchingUser.password === password) {
-                navigation.navigate('MainPage', {user: matchingUser})
-                return;
-            } 
-            Alert.alert("Credenciales invalidas", "El correo o la contraseña son incorrectos")
+      const matchingUser = Users.find((user) => user.email === email);
+      if (matchingUser !== undefined) {
+        if (matchingUser.password === password) {
+          navigation.navigate("MainPage", { user: matchingUser });
+          return;
         }
-        return;
+        Alert.alert(titles.NotValidCredentials, messages.NotValidCredentials);
+      }
+      return;
     }
-    Alert.alert("Campos Vacíos", "Por favor llene todos los campos");
+    Alert.alert(titles.EmptyFields, messages.EmptyFields);
   }
 
   return (
     <ImageBackground source={background} style={styles.background}>
       <View style={styles.loginCard}>
-        <Text style={styles.mainTitle}>¡Ingresa con tus credenciales!</Text>
+        <Text style={styles.mainTitle}>{strings.EnterCredentials}</Text>
         <Field
-          labelText="Correo Electronico"
-          hint="Ingrese su correo electronico"
+          labelText={strings.EmailLabel.Email}
+          hint={strings.EmailLabel.hint}
           getText={getEmail}
         />
         <Field
-          labelText="Contraseña"
-          hint="Ingrese su contraseña"
+          labelText={strings.PasswordLabel.Password}
+          hint={strings.PasswordLabel.hint}
           getText={getPass}
         />
-        <CustomButton Title="Iniciar Sesión" onPress={authenticate} />
+        <CustomButton Title={strings.Login} onPress={authenticate} />
       </View>
     </ImageBackground>
   );

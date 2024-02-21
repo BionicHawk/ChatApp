@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { View, Text, ImageBackground, StyleSheet, Image } from 'react-native'
 import background from "./UserCreationComponents/background.jpg";
 import chatIcon from "./HomeComponents/ChatIcon.png"
 import Theme from './Theme';
 import CustomButton from './UserCreationComponents/CustomButton';
+import { settingsContext } from '../App';
 
 const styles = StyleSheet.create({
     background: {
@@ -32,6 +33,14 @@ const styles = StyleSheet.create({
 
 export default function Home({navigation}) {
 
+    const {language, setLanguage} = useContext(settingsContext)
+    const [strings, setStrings] = useState(language.HomeScreen);
+
+    useEffect(() => {
+        setLanguage(language);
+        setStrings(language.HomeScreen);
+    }, [language])
+
     function navigateToRegisterPage() {
         navigation.navigate('Register');
     }
@@ -42,11 +51,11 @@ export default function Home({navigation}) {
 
   return (
     <ImageBackground source={background} style={styles.background}>
-        <Text style={styles.title}>Bienvenido a ChatApp</Text>
+        <Text style={styles.title}>{strings.WelcomeToChatApp}</Text>
         <Image source={chatIcon} style={styles.image}/>
         <View style={styles.buttons}>
-            <CustomButton Title="Registrarse" onPress={navigateToRegisterPage}/>
-            <CustomButton Title="Inciar Sesión" onPress={navigateToLoginPage}/>
+            <CustomButton Title={strings.SignUp} onPress={navigateToRegisterPage}/>
+            <CustomButton Title={strings.Login} onPress={navigateToLoginPage}/>
         </View>
     </ImageBackground>
   )
