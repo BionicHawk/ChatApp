@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Settings } from "react-native";
-import { languages, settings } from "../Resources/Settings";
+import { languages } from "../Resources/Settings";
 import Theme from "../Theme";
-import Home from "../Home";
 import { settingsContext } from "../../App";
 
 export default function LanguageScreen({ navigation }) {

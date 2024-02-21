@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Modal, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import CustomButton from "../../UserCreationComponents/CustomButton";
 import Constants from "expo-constants";
-import { settings } from "../../Resources/Settings";
 import { settingsContext } from "../../../App";
 
 const styles = StyleSheet.create({

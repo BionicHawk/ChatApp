@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, DrawerLayoutAndroid } from "react-native";
 import MenuButton from "./MainPageComponents/MenuButton";
 import Constants from "expo-constants";
 import SideMenu from "./MainPageComponents/SideMenu";
-import { settings } from "../Resources/Settings";
 import { settingsContext } from "../../App";
 
 const styles = StyleSheet.create({
@@ -38,17 +37,19 @@ export default function MainPage({ route, navigation }) {
   const drawer = useRef(null);
 
   useEffect(() => {
-    setStrings(settings.selectedLanguage.MainPageScreen);
-  }, [settings.selectedLanguage]);
+    setLanguage(language);
+    setStrings(language.MainPageScreen);
+  }, [language]);
 
   function showMenu() {
     drawer.current?.openDrawer();
+    console.log("Tratando de abir el menu lateral...");
+    console.log(`Referencia al menu lateral: ${(drawer.current === null || drawer.current === undefined)}`)
   }
 
   function exitSesion() {
     drawer.current?.closeDrawer();
-    navigation.goBack();
-    navigation.goBack();
+    navigation.popToTop();
   }
 
   function goToLanguageScreen() {

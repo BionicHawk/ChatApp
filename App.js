@@ -8,14 +8,14 @@ import Login from "./src/Login";
 import MainPage from "./src/Pages/MainPage";
 import LanguageScreen from "./src/Pages/LanguageScreen";
 import { createContext, useState } from "react";
-import { settings } from "./src/Resources/Settings";
+import { languages } from "./src/Resources/Settings";
 
 export const settingsContext = createContext()
 
 export default function App() {
   const Stack = createNativeStackNavigator();
 
-  const [language, setLanguage] = useState(settings.selectedLanguage);
+  const [language, setLanguage] = useState(languages.es_mx);
 
   return (
     <settingsContext.Provider value={{language, setLanguage}}>
