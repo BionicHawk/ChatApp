@@ -36,11 +36,6 @@ export default function MainPage({ route, navigation }) {
   const { user } = route.params;
   const drawer = useRef(null);
 
-  useEffect(() => {
-    setLanguage(language);
-    setStrings(language.MainPageScreen);
-  }, [language]);
-
   function showMenu() {
     drawer.current?.openDrawer();
     console.log("Tratando de abir el menu lateral...");
@@ -51,8 +46,9 @@ export default function MainPage({ route, navigation }) {
     drawer.current?.closeDrawer();
     navigation.popToTop();
   }
-
+  
   function goToLanguageScreen() {
+    drawer.current?.closeDrawer();
     navigation.navigate("LanguageSwitching");
   }
 
