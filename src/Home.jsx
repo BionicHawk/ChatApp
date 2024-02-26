@@ -60,9 +60,6 @@ export default function Home({ navigation }) {
         {/* Este botón al ser presionado lleva a la pantalla
             de registro de usuario */}
         <CustomButton Title="Registrarse" onPress={navigateToRegisterPage} />
-        {/* Este botón al ser presionado lleva a la pantalla
-            de inicio de sesión */}
-        <CustomButton Title="Inciar Sesión" onPress={navigateToLoginPage}/>
       </View>
     </ImageBackground>
   );
