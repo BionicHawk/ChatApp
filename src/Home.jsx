@@ -36,7 +36,10 @@ const styles = StyleSheet.create({
 });
 
 export default function Home({ navigation }) {
+    // Está función navega hacia la página de registro
   function navigateToRegisterPage() {
+    /* Se le indica al objeto de navegación que queremos
+       ir a la página de registro */
     navigation.navigate("Register");
   }
 
