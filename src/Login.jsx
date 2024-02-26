@@ -55,28 +55,26 @@ export default function Login() {
   function authenticate() {
     // Comprueba que el correo electrónico y la contraseña no esten vacíos
     if (email.length > 0 && password.length > 0) {
-      // Se busca al usuario que tenga el email proporcionado
-      const matchingUser = Users.find((user) => user.email === email);
-      // Comprueba que matchingUser tenga un usuario
-      if (matchingUser !== undefined) {
-        /* Comprueba que la contraseña propocionada coincida con el del
-           objeto de usuario */
-        if (matchingUser.password === password) {
-          /* Si es así se le lanza una alerta al usuario indicandole que 
-             que todo fue bien */
-          Alert.alert(
-            "Credenciales Correctas",
-            "Las credenciales que proporcionó son las correctas"
-          );
-          // Se sale de la función
-          return;
+        // Se busca al usuario que tenga el email proporcionado
+        const matchingUser = Users.find(user => user.email === email);
+        // Comprueba que matchingUser tenga un usuario
+        if (matchingUser !== undefined) {
+            /* Comprueba que la contraseña propocionada coincida con el del
+               objeto de usuario */
+            if (matchingUser.password === password) {
+                /* Navegando a la "MainPage" después de crear el usuario 
+                   pásandole la información del usuario encontrado */
+                navigation.navigate('MainPage', {user: matchingUser})
+                // Se sale de la función
+                return;
+            }
+            /* En el caso que la contraseña no coincida se le indica al usuario 
+             que alguno de los datos dados no es válido */
+            Alert.alert(
+              "Credenciales invalidas", 
+              "El correo o la contraseña son incorrectos"
+            );
         }
-        /* En el caso que la contraseña no coincida se le indica al usuario 
-           que alguno de los datos dados no es válido */
-        Alert.alert(
-          "Credenciales invalidas",
-          "El correo o la contraseña son incorrectos"
-        );
       }
       // Sale de la función
       return;
