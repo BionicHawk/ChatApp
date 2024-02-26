@@ -2,7 +2,6 @@ import UserCreation from "./src/UserCreation";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./src/Home";
-import Login from "./src/Login";
 
 // Está es la pantalla principal
 export default function App() {
@@ -24,12 +23,6 @@ export default function App() {
           options={{ headerShown: false }}
           name="Register"
           component={UserCreation}
-        />
-        {/* Esta es la pantalla para autenticarse */}
-        <Stack.Screen 
-          options={{ headerShown: false }}
-          name="Login"
-          component={Login}
         />
       </Stack.Navigator>
     </NavigationContainer>
