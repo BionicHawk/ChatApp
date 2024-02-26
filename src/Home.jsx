@@ -43,6 +43,12 @@ export default function Home({ navigation }) {
     navigation.navigate("Register");
   }
 
+  function navigateToLoginPage() {
+    /* Se le indica el objeto de navegación que queremos
+       ir a la página de iniciar sesión*/
+    navigation.navigate('Login');
+  }
+
   return (
     <ImageBackground source={background} style={styles.background}>
       {/* Se declara el titulo principal de la pantalla */}
@@ -54,6 +60,9 @@ export default function Home({ navigation }) {
         {/* Este botón al ser presionado lleva a la pantalla
             de registro de usuario */}
         <CustomButton Title="Registrarse" onPress={navigateToRegisterPage} />
+        {/* Este botón al ser presionado lleva a la pantalla
+            de inicio de sesión */}
+        <CustomButton Title="Inciar Sesión" onPress={navigateToLoginPage}/>
       </View>
     </ImageBackground>
   );
