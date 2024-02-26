@@ -25,7 +25,7 @@ export default function App() {
           name="Register"
           component={UserCreation}
         />
-        {/* Esta es la pantalla para autenticarse */}
+        {/* Esta es la pantalla para autenticarse "Login" */}
         <Stack.Screen 
           options={{ headerShown: false }}
           name="Login"
