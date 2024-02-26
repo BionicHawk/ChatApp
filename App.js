@@ -1,5 +1,3 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
 import UserCreation from "./src/UserCreation";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -12,17 +10,20 @@ export default function App() {
   return (
     // Aquí se está decarando un contenedor para las pantallas
     <NavigationContainer>
-      <Stack.Navigator> {/* Aquí se declara el navegador */}
-        <Stack.Screen 
+      <Stack.Navigator>
+        {/* Aquí se declara el navegador */}
+        <Stack.Screen
           options={{ headerShown: false }}
           name="Home"
           component={Home}
-        /> {/* Esta es la pantalla principal "Home" */}
+        />
+        {/* Esta es la pantalla principal "Home" */}
         <Stack.Screen
           options={{ headerShown: false }}
           name="Register"
           component={UserCreation}
-        /> {/* Esta es la pantalla para registrarse "Register" */}
+        />
+        {/* Esta es la pantalla para registrarse "Register" */}
       </Stack.Navigator>
     </NavigationContainer>
   );
