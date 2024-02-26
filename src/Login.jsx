@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
 });
 
 // Está función renderiza la pantalla de Login
-export default function Login() {
+export default function Login({ navigation }) {
   // Este es el controlador del estado de Correo Electrónico
   const [email, setEmail] = useState("");
   // Este es el controlador del estado de la contraseña
