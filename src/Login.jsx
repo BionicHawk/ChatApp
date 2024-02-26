@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { View, ImageBackground, StyleSheet, Text, Alert } from "react-native";
-import Theme from "./Theme";
 import background from "./UserCreationComponents/background.jpg";
 import CustomButton from "./UserCreationComponents/CustomButton";
 import Field from "./UserCreationComponents/Field";
@@ -29,7 +28,7 @@ const styles = StyleSheet.create({
 });
 
 // Está función renderiza la pantalla de Login
-export default function Login({ navigation }) {
+export default function Login() {
   // Este es el controlador del estado de Correo Electrónico
   const [email, setEmail] = useState("");
   // Este es el controlador del estado de la contraseña
@@ -62,9 +61,12 @@ export default function Login({ navigation }) {
         /* Comprueba que la contraseña propocionada coincida con el del
                objeto de usuario */
         if (matchingUser.password === password) {
-          /* Navegando a la "MainPage" después de crear el usuario 
-                   pásandole la información del usuario encontrado */
-          navigation.navigate("MainPage", { user: matchingUser });
+          /* Haciendole saber al usuario que la autenticación 
+             fue correcta */
+          Alert.alert(
+            "¡Autenticación exitosa!"
+            , "Se han validado sus datos correctamente"
+          );
           // Se sale de la función
           return;
         }

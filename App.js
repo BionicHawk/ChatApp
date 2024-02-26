@@ -3,7 +3,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./src/Home";
 import Login from "./src/Login";
-import MainPage from "./src/Pages/MainPage";
 
 // Está es la pantalla principal
 export default function App() {
@@ -32,7 +31,6 @@ export default function App() {
           name="Login"
           component={Login}
         />
-        <Stack.Screen options={{headerShown: false}} name="MainPage" component={MainPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );
