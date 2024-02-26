@@ -53,6 +53,7 @@ export default function UserCreation({ navigation }) {
   const [correo, setCorreo] = useState("");
   // Este es el controlador de estado de la contraseña
   const [password, setPassword] = useState("");
+  // Este es el controlador de estado de confirmar contraseña
   const [confirmedPass, setConfirmedPass] = useState("");
 
   // Esta función se encarga de obtener el nombre de usuario
@@ -73,17 +74,26 @@ export default function UserCreation({ navigation }) {
     setPassword(value);
   }
 
+  // Está función se encarga de obtener la contraseña de confirmación
   function getConfirmPass(value) {
+    // Actualiza el estado de confirmar contraseña
     setConfirmedPass(value);
   }
 
+  /* Está función se encarga de buscar en la base de datos un usuario que 
+     coincida con el usuario que se pasa como párametro */
   function findMatchingUser(user) {
+    // Recorre todos los usuarios
     for (let i = 0; i < Users.length; ++i) {
+      // se obtiene la referencia del usuario
       const matchingUser = Users[i];
+      // Se comprueba si el usuario tiene el mismo nombre o correo electrónico
       if (matchingUser.name === user.name || matchingUser.email === user.email) {
+        // En caso de que sí se devuelve el usuario que coincide
         return matchingUser;
       }
     }
+    // No devuelve nada puesto que no hubo coincidencias
     return undefined;
   }
 
@@ -93,20 +103,30 @@ export default function UserCreation({ navigation }) {
        no están vacíos */
     if (nombreUsuario.length > 0 && correo.length > 0 && password.length > 0) {
 
+      // Comprueba si la contraseña dada no coincide en ambos campos de la contraseña
       if (password !== confirmedPass) {
+        // Se le indica al usuario que la contraseña no conicide
         Alert.alert("¡La contraseña no coincide!", "La contraseña que proporcionó en los campos no coinicide")
+        // Se sale de la función
         return;
       }
       
       // Se crea el objeto de usuario con los datos dados
       const Usuario = new User(nombreUsuario, correo, password);
+      // Se busca una coincidencia al usuario que se está creando 
       const matchedUser = findMatchingUser(Usuario);
 
+      // Comprueba si matchUser contiene algo
       if (matchedUser !== undefined) {
+        // Se configura un texto que se va a repetir en las alertas
         const defaultMsg = "Intentelo de nuevo";
+        // Comprueba si ya hay un usuario con el mismo nombre
         if (matchedUser.name === Usuario.name) {
+          /* Le indica al usuario que ya hay un usuario con el mismo nombre 
+             de usuario */
           Alert.alert("Ya existe un usuario con ese nombre de usuario", defaultMsg);
         } else {
+          // Le indica al usuario que el correo electrónico no se puede usar
           Alert.alert("Ya existe un usuario con ese correo electronico", defaultMsg);
         }
         return;
@@ -117,6 +137,7 @@ export default function UserCreation({ navigation }) {
       // Se le indica al usuario que su cuenta se ha creado
       Alert.alert("¡Cuenta creada!", "Cuenta creada exitosamente");
       
+      // Navega hacía la pantalla anterior
       navigation.goBack();
       // Sale de la función
       return;
@@ -155,6 +176,8 @@ export default function UserCreation({ navigation }) {
           hint="Inserte la contraseña"
           getText={getPassword}
         />
+        {/* Se delcara el campo donde el usuario repetirá su contraseña,
+            se le da acceso a la función que obtiene la contraseña repetida */}
         <Field 
           labelText="Confirmar Contraseña"
           hint="Vuelva a escribir la contraseña aquí"
