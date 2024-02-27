@@ -74,12 +74,18 @@ export default function UserCreation({ navigation }) {
 
   // Esta función se encarga de encontrar un usuario similar
   function findMatchingUser(user) {
+    // Recorre a todos los usuarios
     for (let i = 0; i < Users.length; ++i) {
+      // Se genera una referencia del usuario
       const matchingUser = Users[i];
+      /* Comprueba si el correo electrónico o el nombre se usuario coninciden 
+         con el usuario que se está creando */
       if (matchingUser.name === user.name || matchingUser.email === user.email) {
+        // Si es así se devuelve al usuario
         return matchingUser;
       }
     }
+    // Se devuelve un objeto indefinido puesto que no hubo coincidencias
     return undefined;
   }
 
