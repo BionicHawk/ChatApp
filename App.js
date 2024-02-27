@@ -32,7 +32,13 @@ export default function App() {
           name="Login"
           component={Login}
         />
-        <Stack.Screen options={{headerShown: false}} name="MainPage" component={MainPage} />
+        {/* Esta es la pantalla principal de después de iniciar
+            sesión "MainPage" */}
+        <Stack.Screen 
+          options={{headerShown: false}} 
+          name="MainPage" 
+          component={MainPage} 
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
