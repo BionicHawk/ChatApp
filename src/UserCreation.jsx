@@ -53,7 +53,6 @@ export default function UserCreation({ navigation }) {
   const [correo, setCorreo] = useState("");
   // Este es el controlador de estado de la contraseña
   const [password, setPassword] = useState("");
-  const [confirmedPass, setConfirmedPass] = useState("");
 
   // Esta función se encarga de obtener el nombre de usuario
   function getUsuario(value) {
@@ -73,10 +72,7 @@ export default function UserCreation({ navigation }) {
     setPassword(value);
   }
 
-  function getConfirmPass(value) {
-    setConfirmedPass(value);
-  }
-
+  // Esta función se encarga de encontrar un usuario similar
   function findMatchingUser(user) {
     for (let i = 0; i < Users.length; ++i) {
       const matchingUser = Users[i];
@@ -92,23 +88,27 @@ export default function UserCreation({ navigation }) {
     /* Comprueba si el nombre de usuario, correo electrónico y contraseña
        no están vacíos */
     if (nombreUsuario.length > 0 && correo.length > 0 && password.length > 0) {
-
-      if (password !== confirmedPass) {
-        Alert.alert("¡La contraseña no coincide!", "La contraseña que proporcionó en los campos no coinicide")
-        return;
-      }
       
       // Se crea el objeto de usuario con los datos dados
       const Usuario = new User(nombreUsuario, correo, password);
       const matchedUser = findMatchingUser(Usuario);
 
+      // Comprueba si ya hay un usuario existente
       if (matchedUser !== undefined) {
+        // Se configura un mensaje por defecto
         const defaultMsg = "Intentelo de nuevo";
+        // Comprueba si el nombre de usuario coindice
         if (matchedUser.name === Usuario.name) {
+          /* Despliega el mensaje indicandole al usuario que ya hay alguien con 
+             ese nombre de usuario */
           Alert.alert("Ya existe un usuario con ese nombre de usuario", defaultMsg);
+          // de otra forma
         } else {
+          /* Despliega el mensaje indicandole al usuario que ya hay alguien con 
+             ese correo electrónico */
           Alert.alert("Ya existe un usuario con ese correo electronico", defaultMsg);
         }
+        // Se sale de la función
         return;
       }
 
@@ -116,7 +116,7 @@ export default function UserCreation({ navigation }) {
       Users.push(Usuario);
       // Se le indica al usuario que su cuenta se ha creado
       Alert.alert("¡Cuenta creada!", "Cuenta creada exitosamente");
-      
+      // Regresa a la pantalla anterior
       navigation.goBack();
       // Sale de la función
       return;
@@ -155,12 +155,7 @@ export default function UserCreation({ navigation }) {
           hint="Inserte la contraseña"
           getText={getPassword}
         />
-        <Field 
-          labelText="Confirmar Contraseña"
-          hint="Vuelva a escribir la contraseña aquí"
-          getText={getConfirmPass}
-        />
-         {/* Se declara el botón que ejecutará la función de Crear cuenta */}
+        {/* Se declara el botón que ejecutará la función de Crear cuenta */}
         <CustomButton Title="Crear Cuenta" onPress={CrearCuenta} />
       </View>
     </ImageBackground>
